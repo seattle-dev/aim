@@ -36,10 +36,7 @@ Deployment and operations
 Error handling  
 Vendor lock-in  
 
-
-
-
-
 ## · Please describe the concept of composition over inheritance
+Composition over inheritance is a core design principle in object-oriented programming that states: favor object composition instead of class inheritance when building flexible, maintainable, and reusable systems. The main idea is as follows: instead of making a class inherit behavior from a parent class (is-a relationship), give it the behavior by containing an instance of another class (has-a relationship). Composition is preffered due to loose coupling, no fragile base class, flexible structure. With composition behavior is reused via interfaces instead of reusing implementation in inheritance. With composition it is easier to swap or extend behavior later that with inheritance.
 
 ## · Describe a design pattern you’ve used in production code. What was the pattern? How did you use it? Given the same problem how would you modify your approach based on your experience?
