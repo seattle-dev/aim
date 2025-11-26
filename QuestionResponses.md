@@ -32,7 +32,7 @@ Idempotency - functions need to be idempotent (same input - same effect)
 Security - least-privileged identity access management roles for each function, secrets should be stored in cloud vault  
 Cost - for serverless, costs directly scale with usage as billing is normally per-invocation and duration 
 Testing and local development - unit tests, integration testing, contract testing  
-Deployment and operations 
+Deployment and operations  
 Error handling  
 Vendor lock-in  
 
