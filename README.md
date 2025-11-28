@@ -21,25 +21,25 @@ Duplicate requests are prevented by checking existence before adding.
 Run the project with Visual Studio or CLI: dotnet run --project ElevatorAPI.
 
 Endpoints  
-•	POST /api/pickup  
+**POST /api/pickup**  
     •	Purpose: Request elevator from a floor (external call).  
     •	Body: PickupRequest (JSON: { "floor": <int> }).  
     •	Behavior: If there is no existing request for that floor already present, adds FloorRequest with current RequestedAt timestamp.  
     •	Response: 202 Accepted.  
-•	POST /api/floors  
+**POST /api/floors**  
     •	Purpose: Request elevator from inside the elevator (internal floor button).  
     •	Body: PickupRequest (JSON: { "floor": <int> }).  
     •	Behavior & response: Same as /api/pickup (idempotent for same floor), returns 202 Accepted.  
-•	GET /api/requested-floors  
+**GET /api/requested-floors**  
     •	Purpose: Return list of currently requested floor numbers.  
     •	Response: 200 OK with array of ints (e.g., [1, 4, 9]).  
-•	GET /api/next-floor  
+**GET /api/next-floor**  
     •	Purpose: Return the next floor to service.  
     •	Behavior: Picks and returns earliest FloorRequest by RequestedAt.
     •	Response:  
         •	If a floor exists: 200 OK { floor: <int>, status: "moving" }  
         •	If none: 200 OK { floor: null, status: "idle" }  
-•	POST /api/serviced  
+**POST /api/serviced**  
     •	Purpose: Report a floor has been serviced.  
     •	Body: FloorServiced (JSON: { "floor": <int> }).  
     •	Behavior: Removes the earliest matching FloorRequest for that floor.  
