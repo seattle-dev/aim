@@ -6,7 +6,6 @@ using ElevatorAPI.Models;
 namespace ElevatorAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public sealed class ElevatorController : ControllerBase
     {
         private readonly ElevatorDbContext _context;
@@ -16,7 +15,7 @@ namespace ElevatorAPI.Controllers
             _context = context;
         }
 
-        // Request an elevator from a floor
+        // Request elevator from a floor
         [HttpPost("/api/pickup")]
         public async Task<IActionResult> RequestFromFloor(PickupRequest req)
         {
@@ -43,8 +42,7 @@ namespace ElevatorAPI.Controllers
         public async Task<IActionResult> RequestFromElevatorAsync([FromBody] PickupRequest req)
         {
             // Check if floor is already requested
-            var existingRequest = await _context.FloorRequests
-                .FirstOrDefaultAsync(f => f.Floor == req.Floor);
+            var existingRequest = await _context.FloorRequests.FirstOrDefaultAsync(f => f.Floor == req.Floor);
 
             if (existingRequest == null)
             {
@@ -64,9 +62,7 @@ namespace ElevatorAPI.Controllers
         [HttpGet("/api/requested-floors")]
         public async Task<IResult> GetRequestedFloors()
         {
-            var floors = await _context.FloorRequests
-                .Select(f => f.Floor)
-                .ToListAsync();
+            var floors = await _context.FloorRequests.Select(f => f.Floor).ToListAsync();
             
             return Results.Ok(floors);
         }
@@ -75,9 +71,7 @@ namespace ElevatorAPI.Controllers
         [HttpGet("/api/next-floor")]
         public async Task<IResult> GetNextFloor()
         {
-            var nextFloor = await _context.FloorRequests
-                .OrderBy(f => f.RequestedAt)
-                .FirstOrDefaultAsync();
+            var nextFloor = await _context.FloorRequests.OrderBy(f => f.RequestedAt).FirstOrDefaultAsync();
 
             if (nextFloor != null)
             {
@@ -91,9 +85,7 @@ namespace ElevatorAPI.Controllers
         [HttpPost("/api/serviced")]
         public async Task<IActionResult> ReportFloorServiced(FloorServiced req)
         {
-            var floorRequest = await _context.FloorRequests
-                .OrderBy(f => f.RequestedAt)
-                .FirstOrDefaultAsync(f => f.Floor == req.Floor);
+            var floorRequest = await _context.FloorRequests.OrderBy(f => f.RequestedAt).FirstOrDefaultAsync(f => f.Floor == req.Floor);
 
             if (floorRequest != null)
             {
