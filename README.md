@@ -20,7 +20,7 @@ Duplicate requests are prevented by checking existence before adding.
 
 Run the project with Visual Studio or CLI: dotnet run --project ElevatorAPI.
 
-Endpoints
+Endpoints  
 •	POST /api/pickup  
     •	Purpose: Request elevator from a floor (external call).  
     •	Body: PickupRequest (JSON: { "floor": <int> }).  
